@@ -5,22 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style type="text/tailwindcss"></style>
-    <title>Document</title>
+    <title>CPN</title>
   </head>
   <body
     class="bg-white text-neutral-950"
   >
-    <nav
+    <!-- HEADER START -->
+    <header
       class="fixed top-0 right-0 left-0 z-50 bg-transparent"
       role="navigation"
       aria-label="Main navigation"
     >
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex h-16 items-center justify-between md:h-18">
+          <!-- Logo -->
           <a
             class="relative z-50 flex items-center gap-2 text-xl font-extrabold"
             aria-label="cpn.page home"
-            href="index.html"
+            href="/"
           >
             <span class="text-neutral-950">
               cpn.page
@@ -32,37 +34,10 @@
               Beta
             </span>
           </a>
-          <div class="hidden md:flex md:items-center md:gap-1">
-            <a
-              href="#"
-              class="px-3 py-2 text-sm font-medium text-neutral-600 hover:text-neutral-950 
-              bg-transparent hover:bg-neutral-100 rounded-lg transition-colors"
-            >
-              지도
-            </a>
-            <a
-              href="#"
-              class="px-3 py-2 text-sm font-medium text-neutral-600 hover:text-neutral-950 
-              bg-transparent hover:bg-neutral-100 rounded-lg transition-colors"
-            >
-              시간표
-            </a>
-            <a
-              href="#"
-              class="px-3 py-2 text-sm font-medium text-neutral-600 hover:text-neutral-950 
-              bg-transparent hover:bg-neutral-100 rounded-lg transition-colors"
-            >
-              게시판
-            </a>
-            <a
-              href="#"
-              class="px-3 py-2 text-sm font-medium text-neutral-600 hover:text-neutral-950 
-              bg-transparent hover:bg-neutral-100 rounded-lg transition-colors"
-            >
-              중고장터
-            </a>
-          </div>
+          <!-- Desktop Nav -->
+          <nav id="navLinks" class="hidden md:flex md:items-center md:gap-1"></nav>
           <div class="hidden md:flex md:items-center md:gap-3">
+            <!-- Language Switcher -->
             <div
               class="relative inline-flex items-center p-1 bg-neutral-100 rounded-full"
               role="radiogroup"
@@ -75,23 +50,23 @@
                 aria-checked="false"
                 aria-label="English"
               >
-                <span>🇺🇸</span>
-                <span>EN</span>
+                <a href="#en">
+                  <span>🇺🇸</span>
+                  <span>EN</span>
+                </a>
               </button>
               <button
                 class="relative z-10 flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium 
-                text-white transition-colors duration-200 rounded-full"
+                text-white bg-neutral-950 transition-colors duration-200 rounded-full"
                 role="radio"
                 aria-checked="true"
                 aria-label="한국어"
               >
-                <span
-                  class="absolute inset-0 bg-neutral-950 rounded-full"
-                ></span>
                 <span>🇰🇷</span>
                 <span>한국어</span>
               </button>
             </div>
+            <!-- Go -->
             <a
               href="#"
               class="inline-flex items-center px-5 py-2 text-sm font-semibold text-white 
@@ -100,6 +75,7 @@
               시작하기
             </a>
           </div>
+          <!-- Mobile Button -->
           <button
             id="menuBtn"
             type="button"
@@ -122,35 +98,17 @@
           </button>
         </div>
       </div>
+      <!-- Mobile Menu -->
       <div 
         id="mobileMenu"
         class="fixed inset-0 z-40 md:hidden bg-white opacity-0 translate-y-6 
         pointer-events-none transition-opacity transition-transform duration-400 ease-out">
         <div class="flex flex-col h-full pt-20 px-6 pb-8">
-          <div class="flex flex-col gap-1">
-            <a href="#" 
-              class="px-4 py-3 text-lg font-semibold text-neutral-800 hover:bg-neutral-100 transition-colors rounded-xl"
-            >
-              지도
-            </a>
-            <a href="#" 
-              class="px-4 py-3 text-lg font-semibold text-neutral-800 hover:bg-neutral-100 transition-colors rounded-xl"
-            >
-              시간표
-            </a>
-            <a href="#" 
-              class="px-4 py-3 text-lg font-semibold text-neutral-800 hover:bg-neutral-100 transition-colors rounded-xl"
-            >
-              게시판
-            </a>
-            <a href="#" 
-              class="px-4 py-3 text-lg font-semibold text-neutral-800 hover:bg-neutral-100 transition-colors rounded-xl"
-            >
-              중고장터
-            </a>
-          </div>
+          <!-- Mobile Nav -->
+          <nav id="mobileNavLinks" class="flex flex-col gap-1"></nav>
           <div class="flex flex-col mt-auto gap-4">
             <div class="flex justify-center gap-3">
+              <!-- Language Switcher -->
               <div 
                 class="relative inline-flex items-center p-1 bg-neutral-100 rounded-full" 
                 role="radiogroup" 
@@ -163,22 +121,24 @@
                   aria-checked="false" 
                   aria-label="English" 
                 >
-                  <span>🇺🇸</span>
-                  <span>EN</span>
+                  <a href="#en">
+                    <span>🇺🇸</span>
+                    <span>EN</span>
+                  </a>
                 </button>
                 <button 
+                  class="relative z-10 flex items-center px-3 py-1.5 gap-1.5 
+                  text-sm font-medium text-white bg-neutral-950 rounded-full"
                   role="radio" 
                   aria-checked="true" 
                   aria-label="한국어" 
-                  class="relative z-10 flex items-center px-3 py-1.5 gap-1.5 
-                  text-sm font-medium text-white rounded-full"
                 >
-                  <span class="absolute inset-0 bg-neutral-950 rounded-full"></span>
                   <span>🇰🇷</span>
                   <span>한국어</span>
                 </button>
               </div>
             </div>
+            <!-- Go -->
             <a 
               href="#" 
               class="flex items-center justify-center px-6 py-3 text-base font-semibold text-white 
@@ -189,29 +149,7 @@
           </div>
         </div>
       </div>
-    </nav>
-    <script>
-      const btn = document.getElementById("menuBtn");
-      const menu = document.getElementById("mobileMenu");
-      const spans = btn.querySelectorAll("span");
-
-      btn.addEventListener("click", () => {
-        menu.classList.toggle("opacity-0");
-        menu.classList.toggle("pointer-events-none");
-        menu.classList.toggle("translate-y-6");
-
-        spans[0].classList.toggle("translate-y-[7px]");
-        spans[0].classList.toggle("rotate-45");
-        spans[1].classList.toggle("opacity-0");
-        spans[2].classList.toggle("-translate-y-[7px]");
-        spans[2].classList.toggle("-rotate-45");
-
-        const expanded = btn.getAttribute("aria-expanded") === "true";
-
-        btn.setAttribute("aria-expanded", !expanded);
-        btn.setAttribute("aria-label", expanded ? "메뉴 열기" : "메뉴 닫기");
-
-      });
-    </script>
+    </header>
+    <script src="./js/nav.js"></script>
   </body>
 </html>
