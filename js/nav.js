@@ -1,27 +1,43 @@
 function renderNav() {
   const links = [
-    { name: "지도", href: "#map" },
-    { name: "시간표", href: "#timetable" },
-    { name: "게시판", href: "#board" },
-    { name: "중고장터", href: "#marketplace" }
+    { name: "지도", href: "/map" },
+    { name: "시간표", href: "/timetable" },
+    { name: "게시판", href: "/board" },
+    { name: "중고장터", href: "/marketplace" }
   ];
 
   const nav = document.getElementById("navLinks");
   const mobileNav = document.getElementById("mobileNavLinks");
 
+  const currentPath = window.location.pathname;
+
   links.forEach(link => {
+    const isActive =
+      currentPath === link.href ||
+      currentPath.startsWith(link.href + "/");
+
     // PC
     const a1 = document.createElement("a");
     a1.href = link.href;
     a1.textContent = link.name;
-    a1.className = "px-3 py-2 text-sm font-medium text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 rounded-lg";
+    a1.className =
+      "px-3 py-2 text-sm font-medium rounded-lg " +
+      (isActive
+        ? "bg-neutral-900 text-white"
+        : "text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100");
+
     nav.appendChild(a1);
 
     // Mobile
     const a2 = document.createElement("a");
     a2.href = link.href;
     a2.textContent = link.name;
-    a2.className = "px-4 py-3 text-lg font-semibold text-neutral-800 hover:bg-neutral-100 rounded-xl";
+    a2.className =
+      "px-4 py-3 text-lg font-semibold rounded-xl " +
+      (isActive
+        ? "bg-neutral-900 text-white"
+        : "text-neutral-800 hover:bg-neutral-100");
+
     mobileNav.appendChild(a2);
   });
 }

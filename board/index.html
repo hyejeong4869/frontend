@@ -1,18 +1,18 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style type="text/tailwindcss"></style>
-    <title>CPN-map</title>
+    <title>CPN-board</title>
   </head>
   <body
     class="flex flex-col max-w-[1440px] h-[100dvh] m-auto bg-white text-neutral-950"
   >
     <!-- HEADER START -->
     <header
-      class="fixed top-0 right-0 left-0 z-50 bg-transparent"
+      class="top-0 right-0 left-0 z-50 bg-transparent"
       role="navigation"
       aria-label="Main navigation"
     >
@@ -150,9 +150,79 @@
         </div>
       </div>
     </header>
-    <!-- MAP START-->
-    <main>
+    <!-- MAIN START -->
+    <main class="flex flex-col flex-1 h-full top-[300px]">
+      <div class="max-w-5xl mx-auto px-4 py-6">
 
+      <!-- 게시글 개수 -->
+      <div class="mb-4 text-lg font-semibold">
+        전체 글 <span id="totalCount">0</span>
+      </div>
+
+      <!-- 테이블 -->
+      <div class="bg-white border rounded-xl overflow-hidden">
+        <table class="w-full text-sm">
+          <tbody id="postTable">
+            <!-- JS로 렌더링 -->
+          </tbody>
+        </table>
+      </div>
     </main>
+
+    <script>
+    // 🔥 백엔드에서 받아온다고 가정한 데이터
+      const posts = [
+        {
+          id: 1,
+          title: "티스토리를 접은지 8개월이 지났습니다.",
+          content: "블로그를 떠난 이후 방문자 수와 수익 변화에 대해 정리한 글입니다.",
+          category: "일상/개발",
+          date: "2023-09-22",
+          comments: 4
+        },
+        {
+          id: 2,
+          title: "[React] Element 크기 감지 방법",
+          content: "ResizeObserver를 활용한 방법을 설명합니다.",
+          category: "React",
+          date: "2023-01-09",
+          comments: 0
+        }
+      ];
+
+      const table = document.getElementById("postTable");
+      const totalCount = document.getElementById("totalCount");
+
+      totalCount.textContent = posts.length;
+
+      function renderPosts() {
+        table.innerHTML = posts.map(post => `
+          <tr class="border-t hover:bg-neutral-50 cursor-pointer">
+            <td class="p-4">
+              <!-- 카드 형태 -->
+              <div class="flex gap-4">
+                <div class="w-16 h-16 flex items-center justify-center text-2xl bg-neutral-200 rounded">
+                  📄
+                </div>
+
+                <ul class="flex-1">
+                  <li class="font-semibold text-base hover:underline">
+                    ${post.title}
+                  </li>
+                  <li class="text-sm text-neutral-600 line-clamp-2">
+                    ${post.content}
+                  </li>
+                  <li class="text-xs text-neutral-500 mt-1">
+                    ${post.category} · ${post.date} · 💬 ${post.comments}
+                  </li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        `).join("");
+      }
+
+      renderPosts();
+    </script>
   </body>
 </html>
