@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style type="text/tailwindcss"></style>
-    <title>CPN</title>
+    <title>CPN-게시글상세</title>
   </head>
   <body
     class="flex flex-col max-w-[1440px] h-[100dvh] m-auto bg-white text-neutral-950"
   >
     <!-- HEADER START -->
     <header
-      class="fixed top-0 right-0 left-0 z-50 bg-transparent"
+      class="top-0 right-0 left-0 z-50 bg-transparent"
       role="navigation"
       aria-label="Main navigation"
     >
@@ -86,13 +86,13 @@
                 <span>한국어</span>
               </button>
             </div>
-            <!-- login -->
+            <!-- logout -->
             <a
               href="#"
-              class="inline-flex items-center justify-center px-5 py-2 w-[100px] text-sm font-semibold text-white 
+              class="inline-flex items-center justify-center w-[100px] px-5 py-2 text-sm font-semibold text-white 
               bg-neutral-950 hover:bg-neutral-800 active:scale-95 transition-colors duration-150 rounded-lg"
             >
-              login
+              logout
             </a>
           </div>
           <!-- Mobile Button -->
@@ -136,7 +136,7 @@
               시간표
             </a>
 
-            <a href="/post/"
+            <a href="/board"
               class="px-4 py-3 text-lg font-semibold text-neutral-800 hover:bg-neutral-100 rounded-xl">
               게시판
             </a>
@@ -178,18 +178,68 @@
                 </button>
               </div>
             </div>
-            <!-- login -->
+            <!-- logout -->
             <a 
               href="#" 
               class="flex items-center justify-center px-6 py-3 text-base font-semibold text-white 
               bg-neutral-950 hover:bg-neutral-800 transition-colors duration-150 active:scale-95 rounded-lg"
             >
-              login
+              logout
             </a>
           </div>
         </div>
       </div>
     </header>
-    <script src="./js/nav.js"></script>
+
+    <!-- Post Add -->
+    <main>
+      <div class="max-w-3xl w-full mx-auto px-4 py-6">
+
+        <!-- 뒤로가기 -->
+        <a href="/post/" class="text-sm text-neutral-500 hover:underline mb-4 inline-block">
+        ← 목록으로
+        </a>
+
+        <!-- 게시글 -->
+        <div id="postDetail" class="border rounded-xl p-5"></div>
+
+      </div>
+
+      <script>
+        // URL에서 id 가져오기
+        const params = new URLSearchParams(window.location.search);
+        const postId = Number(params.get("id"));
+
+        const posts = JSON.parse(localStorage.getItem("posts") || "[]");
+        const post = posts.find(p => p.id === postId);
+
+        const container = document.getElementById("postDetail");
+
+        if (!post) {
+        container.innerHTML = "<p>게시글을 찾을 수 없습니다.</p>";
+        } else {
+        container.innerHTML = `
+            <div class="mb-3">
+            <span class="text-xs px-2 py-1 bg-neutral-200 rounded">
+                ${post.category}
+            </span>
+            </div>
+
+            <h1 class="text-xl font-bold mb-2">
+            ${post.title}
+            </h1>
+
+            <div class="text-sm text-neutral-400 mb-4 flex gap-3">
+            <span>${post.date}</span>
+            <span>댓글 ${post.comments}</span>
+            </div>
+
+            <div class="text-sm leading-relaxed whitespace-pre-line">
+            ${post.content}
+            </div>
+        `;
+        }
+      </script>
+    </main>
   </body>
 </html>

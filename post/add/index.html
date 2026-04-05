@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style type="text/tailwindcss"></style>
-    <title>CPN-board</title>
+    <title>CPN-글쓰기</title>
   </head>
   <body
     class="flex flex-col max-w-[1440px] h-[100dvh] m-auto bg-white text-neutral-950"
@@ -35,7 +35,27 @@
             </span>
           </a>
           <!-- Desktop Nav -->
-          <nav id="navLinks" class="hidden md:flex md:items-center md:gap-1"></nav>
+          <nav id="navLinks" class="hidden md:flex md:items-center md:gap-1">
+            <a href="/map"
+              class="px-3 py-2 text-sm font-medium text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 rounded-lg">
+              지도
+            </a>
+
+            <a href="/timetable"
+              class="px-3 py-2 text-sm font-medium text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 rounded-lg">
+              시간표
+            </a>
+
+            <a href="/board"
+              class="px-3 py-2 text-sm font-medium text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 rounded-lg">
+              게시판
+            </a>
+
+            <a href="/marketplace"
+              class="px-3 py-2 text-sm font-medium text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 rounded-lg">
+              중고장터
+            </a>
+          </nav>
           <div class="hidden md:flex md:items-center md:gap-3">
             <!-- Language Switcher -->
             <div
@@ -105,7 +125,27 @@
         pointer-events-none transition-opacity transition-transform duration-400 ease-out">
         <div class="flex flex-col h-full pt-20 px-6 pb-8">
           <!-- Mobile Nav -->
-          <nav id="mobileNavLinks" class="flex flex-col gap-1"></nav>
+          <nav id="mobileNavLinks" class="flex flex-col gap-1">
+            <a href="/map"
+              class="px-4 py-3 text-lg font-semibold text-neutral-800 hover:bg-neutral-100 rounded-xl">
+              지도
+            </a>
+
+            <a href="/timetable"
+              class="px-4 py-3 text-lg font-semibold text-neutral-800 hover:bg-neutral-100 rounded-xl">
+              시간표
+            </a>
+
+            <a href="/board"
+              class="px-4 py-3 text-lg font-semibold text-neutral-800 hover:bg-neutral-100 rounded-xl">
+              게시판
+            </a>
+
+            <a href="/marketplace"
+              class="px-4 py-3 text-lg font-semibold text-neutral-800 hover:bg-neutral-100 rounded-xl">
+              중고장터
+            </a>
+          </nav>
           <div class="flex flex-col mt-auto gap-4">
             <div class="flex justify-center gap-3">
               <!-- Language Switcher -->
@@ -150,79 +190,72 @@
         </div>
       </div>
     </header>
-    <!-- MAIN START -->
-    <main class="flex flex-col flex-1 h-full top-[300px]">
-      <div class="max-w-5xl mx-auto px-4 py-6">
 
-      <!-- 게시글 개수 -->
-      <div class="mb-4 text-lg font-semibold">
-        전체 글 <span id="totalCount">0</span>
-      </div>
+    <!-- Post Add -->
+    <main>
+      <div class="max-w-3xl w-full mx-auto px-4 py-6">
 
-      <!-- 테이블 -->
-      <div class="bg-white border rounded-xl overflow-hidden">
-        <table class="w-full text-sm">
-          <tbody id="postTable">
-            <!-- JS로 렌더링 -->
-          </tbody>
-        </table>
+        <!-- 제목 -->
+        <h1 class="text-xl font-bold mb-6">글쓰기</h1>
+
+        <!-- form -->
+        <form action="/post/add" method="post" class="flex flex-col gap-5">
+
+            <!-- 카테고리 -->
+            <div>
+            <label class="block text-sm font-semibold mb-2">카테고리</label>
+            <select
+                name="category"
+                class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-300"
+            >
+                <option value="">카테고리 선택</option>
+                <option value="질문">질문</option>
+                <option value="정보">정보</option>
+                <option value="잡담">잡담</option>
+            </select>
+            </div>
+
+            <!-- 제목 -->
+            <div>
+            <label class="block text-sm font-semibold mb-2">제목</label>
+            <input
+                type="text"
+                name="title"
+                placeholder="제목을 입력하세요"
+                class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-300"
+            />
+            </div>
+
+            <!-- 내용 -->
+            <div>
+            <label class="block text-sm font-semibold mb-2">내용</label>
+            <textarea
+                name="content"
+                rows="8"
+                placeholder="내용을 입력하세요"
+                class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-300 resize-none"
+            ></textarea>
+            </div>
+
+            <!-- 버튼 -->
+            <div class="flex justify-end gap-2">
+            <a
+                href="/post"
+                class="px-4 py-2 text-sm rounded-lg border text-neutral-600 hover:bg-neutral-100"
+            >
+                취소
+            </a>
+
+            <button
+                type="submit"
+                class="px-5 py-2 text-sm font-semibold text-white bg-neutral-900 rounded-lg hover:bg-neutral-800 active:scale-95 transition"
+            >
+                등록
+            </button>
+            </div>
+
+        </form>
       </div>
     </main>
-
-    <script>
-    // 🔥 백엔드에서 받아온다고 가정한 데이터
-      const posts = [
-        {
-          id: 1,
-          title: "티스토리를 접은지 8개월이 지났습니다.",
-          content: "블로그를 떠난 이후 방문자 수와 수익 변화에 대해 정리한 글입니다.",
-          category: "일상/개발",
-          date: "2023-09-22",
-          comments: 4
-        },
-        {
-          id: 2,
-          title: "[React] Element 크기 감지 방법",
-          content: "ResizeObserver를 활용한 방법을 설명합니다.",
-          category: "React",
-          date: "2023-01-09",
-          comments: 0
-        }
-      ];
-
-      const table = document.getElementById("postTable");
-      const totalCount = document.getElementById("totalCount");
-
-      totalCount.textContent = posts.length;
-
-      function renderPosts() {
-        table.innerHTML = posts.map(post => `
-          <tr class="border-t hover:bg-neutral-50 cursor-pointer">
-            <td class="p-4">
-              <!-- 카드 형태 -->
-              <div class="flex gap-4">
-                <div class="w-16 h-16 flex items-center justify-center text-2xl bg-neutral-200 rounded">
-                  📄
-                </div>
-
-                <ul class="flex-1">
-                  <li class="font-semibold text-base hover:underline">
-                    ${post.title}
-                  </li>
-                  <li class="text-sm text-neutral-600 line-clamp-2">
-                    ${post.content}
-                  </li>
-                  <li class="text-xs text-neutral-500 mt-1">
-                    ${post.category} · ${post.date} · 💬 ${post.comments}
-                  </li>
-                </ul>
-              </div>
-            </td>
-          </tr>
-        `).join("");
-      }
-
-      renderPosts();
-    </script>
   </body>
 </html>
